@@ -5,7 +5,7 @@ Write-Host "   Streamlit App Installer"
 Write-Host "==============================="
 
 # CONFIGURATION
-$envName = "predictor"       # Update if your env name is different
+$envName = "modelprediction"       # Update if your env name is different
 $yamlFile = "environment.yml"
 $appFile = "app.py"
 $shortcutName = "Start Predictor App.lnk"
