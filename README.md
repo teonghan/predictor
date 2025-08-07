@@ -1,65 +1,86 @@
-# 🔮 Model Prediction App  
-*Your model, your rules — predict away!*
+# 🔮 Model Prediction App
 
-Welcome to the **Model Prediction App**, where `.pkl` files meet Streamlit magic. Got a trained model? Just toss it in here and watch the predictions flow. Single row? Whole file? We got you.
+A flexible Streamlit tool to **load a trained model (.pkl)** and generate predictions via single entry or batch upload — all within a friendly web interface.
 
-This is a companion app to https://github.com/teonghan/stat_quickie
-
----
-
-## 🚀 What This App Does
-
-- 📤 Upload your **trained model (.pkl)**  
-- 📊 Predict using **a single data point** or **batch files (CSV/Excel)**  
-- 🧠 Supports **classification** _and_ **regression**  
-- 🧼 Handles preprocessing like a pro (categoricals, missing columns, OHE logic)
+Try it online 👉 *https://predictor-pickle.streamlit.app/*
 
 ---
 
-## 💡 Why Use This?
+## 🚀 Overview
 
-Because:
-- You don’t want to rebuild your pipeline from scratch
-- You want a slick interface for stakeholders (or yourself 😎)
-- You like pressing buttons more than writing code
+This app helps you perform fast predictions using your trained machine learning model (classification or regression) by:
+
+- 📤 Uploading your `.pkl` model (with metadata)
+- 🔢 Entering a single data row (with input UI)
+- 📄 Uploading a full dataset (CSV or Excel)
+- 🧼 Auto-preprocessing your inputs (e.g., one-hot encoding, missing features)
 
 ---
 
-## 🛠️ How to Use
+## ✅ Key Features
 
-1. Train and export your model (with metadata!) from your pipeline or notebook
-2. Clone this repo:
+- Supports both **regression** and **classification**
+- Visual mapping of class labels
+- Shows prediction probabilities (if available)
+- Downloadable batch predictions (CSV)
+- Works with **categorical**, **numerical**, and **mixed** features
 
-   ```bash
-   git clone https://github.com/teonghan/predictor.git
-   cd predictor
-   ```
+---
 
-3. Install dependencies:
+## 🛠 Installation
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Option 1: One-Click macOS Installer
 
-4. Run the app:
+```bash
+bash installer-macos-universal.sh
+```
 
-   ```bash
-   streamlit run app.py
-   ```
+What it does:
+- Detects Apple Silicon or Intel
+- Installs Miniforge if not found
+- Creates conda env (`modelprediction`)
+- Adds Desktop shortcut with Automator icon
 
-5. Upload your `.pkl` and go wild.
+---
+
+### Option 2: One-Click Windows Installer
+
+```powershell
+Right-click → Run with PowerShell → installer-windows.ps1
+```
+
+What it does:
+- Detects Anaconda/Miniconda
+- Creates or updates `modelprediction` env from `__environment__.yml`
+- Creates launcher (`start-streamlit-app.ps1`)
+- Adds Desktop shortcut (`Start Model Prediction App`)
+- Generates uninstaller (`uninstall-streamlit-app.ps1`)
+
+> 💡 **Note**: Ensure Conda is installed before running.
+
+---
+
+### Option 3: Manual Setup
+
+```bash
+git clone https://github.com/teonghan/predictor.git
+cd predictor
+conda env create -f __environment__.yml
+conda activate modelprediction
+streamlit run app.py
+```
 
 ---
 
 ## 📦 Model Format Requirements
 
-Your `.pkl` file should be a dictionary like:
+The uploaded `.pkl` must be a dictionary like:
 
 ```python
 {
   'model': trained_model,
   'feature_names': [...],
-  'target_column': 'Appraisal 2023',
+  'target_column': 'Your Target',
   'is_regression': True or False,
   'label_encoder': encoder_or_None,
   'original_predictor_cols': [...],
@@ -68,24 +89,36 @@ Your `.pkl` file should be a dictionary like:
 }
 ```
 
-> 🧙 No worries — you’ll get a friendly error if something’s off.
+If something’s missing or malformed, the app will show a helpful error.
 
 ---
 
-## 📸 Screenshots (Add Yours!)
+## 🧪 Input Data
 
-- Upload interface  
-- Prediction output  
-- Probability tables for classifiers  
-- Download button for batch results
+You can either:
+1. **Manually input** values for prediction (single-row)
+2. **Upload batch files** (`.csv`, `.xlsx`) and download prediction results
 
----
-
-## 🤘 Made with
-
-- [Streamlit](https://streamlit.io)
-- [scikit-learn](https://scikit-learn.org)
+Uploaded files must have all expected feature columns. Missing values will be auto-filled.
 
 ---
 
-> 🎉 Happy modeling!
+## 📦 Dependencies
+
+Included in `__environment__.yml` or `requirements.txt`:
+
+- `streamlit`
+- `pandas`
+- `numpy`
+- `scikit-learn`
+- `lightgbm`
+
+---
+
+## 📃 License
+
+MIT License — free for personal, academic, or commercial use.
+
+---
+
+> 🧠 Predict smarter, faster — without writing another line of code.
