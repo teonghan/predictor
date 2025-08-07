@@ -6,7 +6,7 @@ Write-Host "==============================="
 
 # CONFIGURATION
 $envName = "modelprediction"       # Update if your env name is different
-$yamlFile = "environment.yml"
+$yamlFile = "__environment__.yml"
 $appFile = "app.py"
 $shortcutName = "Start Predictor App.lnk"
 
